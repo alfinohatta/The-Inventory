@@ -1,4 +1,4 @@
-# Inventory Management System - Supabase Edition
+# Inventory Management System
 
 Aplikasi desktop inventori menggunakan JavaFX dengan **Supabase** (PostgreSQL) backend.
 
