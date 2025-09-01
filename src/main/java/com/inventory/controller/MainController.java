@@ -100,6 +100,7 @@ public class MainController {
         }
     }
     
+    @SuppressWarnings("unused")
     private void setupItemsTable() {
         codeColumn.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -120,11 +121,11 @@ public class MainController {
             }
         });
         
-        filteredItems = new FilteredList<>(itemsList, p -> true);
+        filteredItems = new FilteredList<>(itemsList, _ -> true);
         itemsTable.setItems(filteredItems);
         
         // Search functionality
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+        searchField.textProperty().addListener((_, __, newValue) -> {
             filteredItems.setPredicate(item -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
@@ -144,7 +145,7 @@ public class MainController {
         
         // Load items into combo box
         receiveItemComboBox.setItems(itemsList);
-        receiveItemComboBox.setCellFactory(param -> new ListCell<Item>() {
+        receiveItemComboBox.setCellFactory(_ -> new ListCell<Item>() {
             @Override
             protected void updateItem(Item item, boolean empty) {
                 super.updateItem(item, empty);
@@ -167,7 +168,7 @@ public class MainController {
         
         // Load items into combo box
         issueItemComboBox.setItems(itemsList);
-        issueItemComboBox.setCellFactory(param -> new ListCell<Item>() {
+        issueItemComboBox.setCellFactory(_ -> new ListCell<Item>() {
             @Override
             protected void updateItem(Item item, boolean empty) {
                 super.updateItem(item, empty);
