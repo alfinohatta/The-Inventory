@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.inventory.controller.MainController"
+      spacing="15" style="-fx-background-color: #f8f9fa;">
+    
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    
+    <!-- Header -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Inventory Management System" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="statusLabel" text="Ready" style="-fx-text-fill: #27ae60;"/>
+    </HBox>
+    
+    <!-- Tab Pane -->
+    <TabPane fx:id="mainTabPane" VBox.vgrow="ALWAYS">
+        
+        <!-- Items Tab -->
+        <Tab text="Items" closable="false">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Button text="Add New Item" onAction="#showAddItemDialog" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                    <Button text="Edit Item" onAction="#editSelectedItem" style="-fx-background-color: #f39c12; -fx-text-fill: white;"/>
+                    <Button text="Delete Item" onAction="#deleteSelectedItem" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="searchField" promptText="Search items..." prefWidth="200" onKeyReleased="#searchItems"/>
+                </HBox>
+                
+                <TableView fx:id="itemsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Code" fx:id="codeColumn" prefWidth="100"/>
+                        <TableColumn text="Name" fx:id="nameColumn" prefWidth="200"/>
+                        <TableColumn text="Category" fx:id="categoryColumn" prefWidth="120"/>
+                        <TableColumn text="Unit" fx:id="unitColumn" prefWidth="80"/>
+                        <TableColumn text="Min Stock" fx:id="minStockColumn" prefWidth="100"/>
+                        <TableColumn text="Palindrome" fx:id="palindromeColumn" prefWidth="100"/>
+                        <TableColumn text="Current Stock" fx:id="currentStockColumn" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+        
+        <!-- Receive Tab -->
+        <Tab text="Receive (Goods In)" closable="false">
+            <VBox spacing="10">
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300"/>
+                        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300"/>
+                    </columnConstraints>
+                    
+                    <Label text="Reference:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="receiveReferenceField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Date:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <DatePicker fx:id="receiveDatePicker" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Item:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <ComboBox fx:id="receiveItemComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="300"/>
+                    
+                    <Label text="Quantity:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <TextField fx:id="receiveQtyField" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Unit Price:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField fx:id="receivePriceField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Location:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <ComboBox fx:id="receiveLocationComboBox" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <TextArea fx:id="receiveNotesArea" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="3" prefRowCount="3"/>
+                </GridPane>
+                
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Receive Items" onAction="#receiveItems" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+        </Tab>
+        
+        <!-- Issue Tab -->
+        <Tab text="Issue (Goods Out)" closable="false">
+            <VBox spacing="10">
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300"/>
+                        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300"/>
+                    </columnConstraints>
+                    
+                    <Label text="Reference:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="issueReferenceField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Date:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <DatePicker fx:id="issueDatePicker" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Item:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <ComboBox fx:id="issueItemComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="300"/>
+                    
+                    <Label text="Quantity:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <TextField fx:id="issueQtyField" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <ComboBox fx:id="issueLocationComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Condition:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <ComboBox fx:id="issueConditionComboBox" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <TextArea fx:id="issueNotesArea" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="3" prefRowCount="3"/>
+                </GridPane>
+                
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Issue Items" onAction="#issueItems" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+        </Tab>
+        
+        <!-- Reports Tab -->
+        <Tab text="Reports" closable="false">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Date Range:"/>
+                    <DatePicker fx:id="reportStartDate" promptText="Start Date"/>
+                    <Label text="to"/>
+                    <DatePicker fx:id="reportEndDate" promptText="End Date"/>
+                    <Button text="Generate Report" onAction="#generateReport" style="-fx-background-color: #9b59b6; -fx-text-fill: white;"/>
+                    <Button text="Export CSV" onAction="#exportToCSV" style="-fx-background-color: #34495e; -fx-text-fill: white;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+                
+                <TableView fx:id="reportTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Date" fx:id="reportDateColumn" prefWidth="100"/>
+                        <TableColumn text="Reference" fx:id="reportReferenceColumn" prefWidth="150"/>
+                        <TableColumn text="Type" fx:id="reportTypeColumn" prefWidth="100"/>
+                        <TableColumn text="Item" fx:id="reportItemColumn" prefWidth="200"/>
+                        <TableColumn text="Quantity" fx:id="reportQtyColumn" prefWidth="100"/>
+                        <TableColumn text="Notes" fx:id="reportNotesColumn" prefWidth="200"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+        
+        <!-- Settings Tab -->
+        <Tab text="Settings" closable="false">
+            <VBox spacing="15">
+                <Label text="System Configuration" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                
+                <GridPane hgap="15" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="250" prefWidth="300"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300"/>
+                    </columnConstraints>
+                    
+                    <Label text="Count non-usable items as outgoing:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <CheckBox fx:id="countNonUsableCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    
+                    <Label text="Allow negative stock:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <CheckBox fx:id="allowNegativeStockCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Supabase URL:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField fx:id="supabaseUrlField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Supabase API Key:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <TextField fx:id="supabaseApiKeyField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                </GridPane>
+                
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Save Settings" onAction="#saveSettings" style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                    <Button text="Test Connection" onAction="#testSupabaseConnection" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                </HBox>
+            </VBox>
+        </Tab>
+        
+    </TabPane>
+    
+</VBox> 
