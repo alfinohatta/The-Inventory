@@ -2,9 +2,7 @@
 
 Aplikasi desktop inventori menggunakan JavaFX dengan **Supabase** (PostgreSQL) backend.
 
-## 🚀 **Perubahan Arsitektur: MySQL → Supabase**
-
-Aplikasi telah diupgrade dari MySQL ke **Supabase** untuk memberikan:
+Aplikasi telah dibuat untuk memberikan:
 - **Cloud-native**: Tidak perlu setup database lokal
 - **Auto-scaling**: Database yang otomatis scalable
 - **Built-in REST API**: API endpoints otomatis untuk semua tabel
